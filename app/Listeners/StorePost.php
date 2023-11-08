@@ -14,6 +14,7 @@ use App\Models\Post;
 use App\Models\PostCategory;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 class StorePost implements ShouldQueue
 {
@@ -59,7 +60,7 @@ class StorePost implements ShouldQueue
                 'content' => 'post with the title '.$newPost->title.' has been created successfully'
             ]);
             DB::commit();;
-        } catch(\Illuminate\Database\QueryException $exception)  {
+        } catch(QueryException $exception)  {
             DB::rollBack();
             $errorCode = $exception->errorInfo[1];
             if($errorCode == 1062) {
