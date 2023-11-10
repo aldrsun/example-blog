@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\HttpsMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -32,6 +33,7 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
+            \App\Http\Middleware\HttpsMiddleware::class, // To force https for every route
             \App\Http\Middleware\Language::class, // To apply selected language
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
